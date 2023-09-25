@@ -5,9 +5,9 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-const api_url = 'https://flix-api-1faf.onrender.com';
+const apiUrl = 'https://flix-api-1faf.onrender.com';
 
 @Injectable({
   providedIn: 'root',
@@ -18,21 +18,52 @@ export class FetchApiDataService {
   public registration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
-      .post(api_url + '/register', userDetails)
+      .post(apiUrl + '/register', userDetails)
       .pipe(catchError(this.handleError));
   }
 
   //User login
   public login(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http
-      .post(api_url + '/login', userDetails)
-      .pipe(catchError(this.handleError));
+    return this.http.post<any>(apiUrl + 'login', userDetails).pipe(
+      tap((response) => {
+        const token = response?.token;
+        if (token) {
+          localStorage.setItem('token', token); //set token
+        } else {
+          console.error('Token not found in the response');
+        }
+      }),
+      catchError(this.handleError)
+    );
   }
 
   //Get all movies
-
-  private handleError(error: any): any {
+  public movies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(apiUrl + '/movies', {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+//get movie by title
+  public movieByTitle(title: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(apiUrl + '/movies/:title', {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  
+  //movies/directors/:name"
+  //start from here
+   private handleError(error: any): any {
     if (error) {
       console.error('Some error occurred:', error);
     } else {
@@ -41,5 +72,10 @@ export class FetchApiDataService {
       );
     }
     return throwError('Something bad happened; please try again later.');
+  }
+
+  private extractResponseData(res: any): any {
+    const body = res;
+    return body || {};
   }
 }
