@@ -13,6 +13,7 @@ export class FetchApiDataService {
 
   public registration(userDetails: any): Observable<any> {
     console.log(userDetails);
+
     return this.http
       .post(this.baseApiUrl + '/register', userDetails)
       .pipe(catchError(this.handleError));
@@ -21,6 +22,7 @@ export class FetchApiDataService {
   //To userLogin: HTTP Method => post, endpoint -"/login", reqBody - userDetails, token = set token in localstorage
   public login(userDetails: any): Observable<any> {
     console.log(userDetails);
+
     return this.http.post<any>(`${this.baseApiUrl}/login`, userDetails).pipe(
       tap((response) => {
         const token = response?.token;
@@ -40,6 +42,7 @@ export class FetchApiDataService {
   //Get all movies:  HTTP Method => get, endpoint -"/movies"
   public movies(): Observable<any> {
     const token = this.getToken();
+
     return this.http
       .get(this.baseApiUrl + '/movies', {
         headers: new HttpHeaders({
@@ -53,6 +56,7 @@ export class FetchApiDataService {
   public movieByTitle(title: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/${title}`;
+
     return this.http
       .get(url, {
         headers: new HttpHeaders({
@@ -66,6 +70,7 @@ export class FetchApiDataService {
   public movieByDirector(name: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/directors/${name}`;
+
     return this.http
       .get(url, {
         headers: new HttpHeaders({
@@ -79,6 +84,7 @@ export class FetchApiDataService {
   public movieByGenre(name: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/genre/${name}`;
+
     return this.http
       .get(url, {
         headers: new HttpHeaders({
@@ -92,6 +98,7 @@ export class FetchApiDataService {
   public addFavMovie(movieTitle: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/addfab/${movieTitle}`;
+
     return this.http
       .post(url, {
         headers: new HttpHeaders({
@@ -126,6 +133,7 @@ export class FetchApiDataService {
   public deleteFavMovie(movieTitle: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/deletefab/${movieTitle}`;
+
     return this.http
       .delete(url, {
         headers: new HttpHeaders({
@@ -138,6 +146,7 @@ export class FetchApiDataService {
   //To update user: HTTP Method => put, endpoint ->"/updateUser", reqbody-> userToUpdate,token = from localstorage, passed token in header
   public updateUser(userToUpdate: any): Observable<any> {
     const token = this.getToken();
+
     return this.http
       .put(this.baseApiUrl + '/updateUser', userToUpdate, {
         headers: new HttpHeaders({
@@ -150,6 +159,7 @@ export class FetchApiDataService {
   //To delete user: HTTP Method => delete,  endpoint ->("/deleteUser", token = from localstorage, passed token in header)
   public deleteUser(): Observable<any> {
     const token = this.getToken();
+
     return this.http
       .delete(this.baseApiUrl + '/deleteUser', {
         headers: new HttpHeaders({
