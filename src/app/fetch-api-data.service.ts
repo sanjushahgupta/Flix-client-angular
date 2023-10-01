@@ -12,7 +12,7 @@ export class FetchApiDataService {
   private baseApiUrl = 'https://flix-api-1faf.onrender.com';
 
   public registration(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    console.log('user is', userDetails);
 
     return this.http
       .post(this.baseApiUrl + '/register', userDetails)
