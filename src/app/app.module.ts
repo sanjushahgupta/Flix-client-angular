@@ -14,8 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+
 @NgModule({
-  declarations: [AppComponent, UserRegistrationFormComponent],
+  declarations: [
+    AppComponent,
+    UserRegistrationFormComponent,
+    UserLoginFormComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
