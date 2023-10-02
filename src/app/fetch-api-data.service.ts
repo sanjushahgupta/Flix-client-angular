@@ -12,8 +12,6 @@ export class FetchApiDataService {
   private baseApiUrl = 'https://flix-api-1faf.onrender.com';
 
   public registration(userDetails: any): Observable<any> {
-    console.log(userDetails);
-
     return this.http
       .post(this.baseApiUrl + '/register', userDetails)
       .pipe(catchError(this.handleError));
@@ -21,8 +19,6 @@ export class FetchApiDataService {
 
   //To userLogin: HTTP Method => post, endpoint -"/login", reqBody - userDetails, token = set token in localstorage
   public login(userDetails: any): Observable<any> {
-    console.log(userDetails);
-
     return this.http.post<any>(`${this.baseApiUrl}/login`, userDetails).pipe(
       tap((response) => {
         const token = response?.token;

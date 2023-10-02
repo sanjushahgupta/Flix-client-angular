@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<mat-card style="background-color: white">
+  <mat-card-header>
+    <mat-card-title>Sign Up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.userName"
+          placeholder="Username"
+          type="text"
+          name="Username"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.password"
+          type="password"
+          placeholder="Password"
+          name="Password"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.email"
+          type="email"
+          placeholder="Email"
+          name="Email"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.birth"
+          type="date"
+          placeholder="Birthday"
+          name="Birthday"
+        />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      (click)="registerUser()"
+      style="
+        background-color: rgb(5, 37, 88);
+        color: white;
+        display: block;
+        margin: 0 auto;
+      "
+    >
+      Sign-Up
+    </button>
+  </mat-card-actions>
+</mat-card>
