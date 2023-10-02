@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<h1>Welcome to myFlix</h1>
+<div class="main-page">
+  <button
+    mat-raised-button
+    (click)="openUserRegistrationDialog()"
+    style="
+      margin: 10px;
+      width: 130px;
+      height: auto;
+      padding: 10px;
+      background-color: rgb(7, 81, 131);
+      color: white;
+      font-size: larger;
+    "
+  >
+    Sign Up
+  </button>
+  <button
+    mat-raised-button
+    (click)="openUserLoginDialog()"
+    style="
+      margin: 10px;
+      width: 130px;
+      height: auto;
+      padding: 10px;
+      font-size: larger;
+      background-color: rgb(17, 176, 120);
+      color: white;
+    "
+  >
+    Login
+  </button>
+
+  <style>
+    .main-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    h1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 80px;
+    }
+  </style>
+</div>
