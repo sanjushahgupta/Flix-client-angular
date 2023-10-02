@@ -32,4 +32,16 @@ export class MovieCardComponent {
       width: '300px',
     });
   }
+
+  addInFav(movieTitle: string): void {
+    this.fetchApiData.addFavMovie(movieTitle).subscribe((response: any) => {
+      console.log('response is:', response);
+    });
+  }
+
+  isFav(movieId: string): boolean {
+    const isFab = this.fetchApiData.isFavourite(movieId);
+    console.log('is fav', isFab);
+    return isFab;
+  }
 }

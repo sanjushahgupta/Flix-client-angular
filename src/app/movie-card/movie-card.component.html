@@ -41,7 +41,14 @@
         <h2>{{ movie.Director.Name }}</h2>
         <h2>{{ movie.Director.Bio }}</h2>
       </ng-template>
-      <mat-icon>favorite_border</mat-icon>
+
+      <mat-icon
+        *ngIf="isFav"
+        [ngStyle]="{ color: 'red' }"
+        (click)="addInFav(movie.Title)"
+      >
+        favorite_border</mat-icon
+      >
     </mat-card-actions>
   </mat-card>
 </div>

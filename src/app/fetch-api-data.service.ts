@@ -94,9 +94,10 @@ export class FetchApiDataService {
   public addFavMovie(movieTitle: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/addfab/${movieTitle}`;
-
+    console.log('add fav token', token);
+    const requestData = { movieTitle: movieTitle };
     return this.http
-      .post(url, {
+      .post<any>(url, requestData, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -104,7 +105,7 @@ export class FetchApiDataService {
       .pipe(
         map(this.getResponseData),
         tap((response) => {
-          if (response && response.status === 201) {
+          if (response) {
             const loggedInUser = JSON.parse(
               localStorage.getItem('loggedInUser') || '{}'
             );
@@ -146,10 +147,20 @@ export class FetchApiDataService {
     return this.http
       .put(this.baseApiUrl + '/updateUser', userToUpdate, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(map(this.getResponseData), catchError(this.handleError));
+  }
+
+  public isFavourite(movieId: string): boolean {
+    const user = this.getLoggedInUser();
+    if (user) {
+      const isfab = user.favoriteMovies.includes(movieId);
+      console.log('is fav', isfab);
+      return isfab;
+    }
+    return false;
   }
 
   //To delete user: HTTP Method => delete,  endpoint ->("/deleteUser", token = from localstorage, passed token in header)
