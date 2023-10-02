@@ -36,7 +36,7 @@ export class FetchApiDataService {
   }
 
   //Get all movies:  HTTP Method => get, endpoint -"/movies"
-  public movies(): Observable<any> {
+  public getAllMovies(): Observable<any> {
     const token = this.getToken();
 
     return this.http
