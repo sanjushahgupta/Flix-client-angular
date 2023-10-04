@@ -33,15 +33,19 @@ export class MovieCardComponent {
     });
   }
 
-  addInFav(movieTitle: string): void {
-    this.fetchApiData.addFavMovie(movieTitle).subscribe((response: any) => {
-      console.log('response is:', response);
-    });
+  addInFav(movieId: string, movieTitle: string): void {
+    this.fetchApiData
+      .addFavMovie(movieId, movieTitle)
+      .subscribe((response: any) => {});
+  }
+  removeFav(movieId: string, movieTitle: string): void {
+    this.fetchApiData
+      .deleteFavMovie(movieId, movieTitle)
+      .subscribe((response: any) => {});
   }
 
-  isFav(movieId: string): boolean {
-    const isFab = this.fetchApiData.isFavourite(movieId);
-    console.log('is fav', isFab);
+  isFav(movieTitle: string): boolean {
+    const isFab = this.fetchApiData.isFavourite(movieTitle);
     return isFab;
   }
 }

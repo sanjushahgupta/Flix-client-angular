@@ -43,12 +43,20 @@
       </ng-template>
 
       <mat-icon
-        *ngIf="isFav"
+        *ngIf="isFav(movie._id)"
         [ngStyle]="{ color: 'red' }"
-        (click)="addInFav(movie.Title)"
+        (click)="removeFav(movie._id, movie.Title)"
       >
-        favorite_border</mat-icon
+        favorite
+      </mat-icon>
+
+      <mat-icon
+        *ngIf="!isFav(movie._id)"
+        [ngStyle]="{ color: 'black' }"
+        (click)="addInFav(movie._id, movie.Title)"
       >
+        favorite_border
+      </mat-icon>
     </mat-card-actions>
   </mat-card>
 </div>
