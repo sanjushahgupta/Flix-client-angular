@@ -1,4 +1,6 @@
 <div style="display: block">
+  <button (click)="toProfilePage()">Profile</button>
+  <mat-icon (click)="logout()">logout</mat-icon>
   <mat-card style="margin: 10px" *ngFor="let movie of movies; let i = index">
     <mat-card-header>
       <mat-card-title>{{ movie.Title }}</mat-card-title>
@@ -8,6 +10,7 @@
       alt="{{ movie.Title }}"
       style="width: 150px; height: 180px"
     />
+
     <mat-card-actions>
       <button mat-button (click)="openDialog(genreTemplate)" color="secondary">
         Genre

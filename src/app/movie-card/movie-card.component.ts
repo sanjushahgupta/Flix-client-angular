@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { publishFacade } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -12,7 +12,8 @@ export class MovieCardComponent {
   movies: any[] = [];
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +23,6 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      console.log(this.movies);
       return this.movies;
     });
   }
@@ -34,18 +34,24 @@ export class MovieCardComponent {
   }
 
   addInFav(movieId: string, movieTitle: string): void {
-    this.fetchApiData
-      .addFavMovie(movieId, movieTitle)
-      .subscribe((response: any) => {});
+    this.fetchApiData.addFavMovie(movieId, movieTitle).subscribe(() => {});
   }
+
   removeFav(movieId: string, movieTitle: string): void {
-    this.fetchApiData
-      .deleteFavMovie(movieId, movieTitle)
-      .subscribe((response: any) => {});
+    this.fetchApiData.deleteFavMovie(movieId, movieTitle).subscribe(() => {});
   }
 
   isFav(movieTitle: string): boolean {
     const isFab = this.fetchApiData.isFavourite(movieTitle);
     return isFab;
+  }
+
+  toProfilePage() {
+    this.router.navigate(['profile']);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['welcome']);
   }
 }

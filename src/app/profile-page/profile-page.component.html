@@ -1,0 +1,55 @@
+<div style="display: block">
+  <mat-card style="margin: 10px">
+    <form>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.userName"
+          placeholder="{{ userData.userName }}"
+          type="text"
+          name="Username"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.password"
+          type="password"
+          placeholder="{{ userData.password }}"
+          name="Password"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.email"
+          type="password"
+          placeholder="{{ userData.email }}"
+          name="Password"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="userData.birth"
+          type="password"
+          placeholder="{{ userData.birth }}"
+          name="Password"
+          required
+        />
+      </mat-form-field>
+      <button (click)="updateProfile()">update Profile</button>
+    </form>
+    <button
+      mat-raised-button
+      style="margin: 10px"
+      (click)="deleteProfile()"
+      color="secondary"
+    >
+      Delete User
+    </button>
+  </mat-card>
+</div>

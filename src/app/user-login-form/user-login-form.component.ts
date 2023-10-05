@@ -25,14 +25,12 @@ export class UserLoginFormComponent implements OnInit {
     this.fetchApiData.login(this.userData).subscribe(
       (response) => {
         this.router.navigate(['movies']);
-        console.log('login response', response);
         this.diagolRef.close();
         this.snackBar.open('Login successful', 'OK', {
           duration: 2000,
         });
       },
       (response) => {
-        console.log('login response', response);
         this.snackBar.open(response, 'OK', {
           duration: 2000,
         });

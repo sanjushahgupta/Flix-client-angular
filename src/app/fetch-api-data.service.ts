@@ -4,11 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+  ) { }
   private baseApiUrl = 'https://flix-api-1faf.onrender.com';
 
   public registration(userDetails: any): Observable<any> {
@@ -184,6 +186,7 @@ export class FetchApiDataService {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
+        responseType: 'text',
       })
       .pipe(map(this.getResponseData), catchError(this.handleError));
   }
