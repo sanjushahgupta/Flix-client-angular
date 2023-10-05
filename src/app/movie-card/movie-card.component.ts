@@ -29,7 +29,7 @@ export class MovieCardComponent {
 
   openDialog(templateRef: any) {
     this.dialog.open(templateRef, {
-      width: '300px',
+      width: '500px',
     });
   }
 

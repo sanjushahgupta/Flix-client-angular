@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatSnackBarModule,
     MatIconModule,
+    MatToolbarModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],
