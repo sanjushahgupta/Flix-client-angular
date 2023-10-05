@@ -22,7 +22,7 @@ export class ProfilePageComponent implements OnInit {
     password: 'Your password',
     email: this.userDetails().email,
     birth: this.userDetails().birth,
-    favouriteMovies: this.userDetails().favouriteMovies,
+    favoriteMovies: this.userDetails().favoriteMovies,
   };
 
   ngOnInit(): void {}
