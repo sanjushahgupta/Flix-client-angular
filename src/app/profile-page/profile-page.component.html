@@ -1,5 +1,22 @@
-<mat-card style="margin: 10px">
-  <form style="display: block;">
+<mat-card-content
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(7, 81, 131);
+  "
+>
+  <h1>Account information</h1>
+  <form
+    style="
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    "
+  >
     <mat-form-field>
       <input
         matInput
@@ -26,7 +43,7 @@
         [(ngModel)]="userData.email"
         type="text"
         placeholder="{{ userData.email }}"
-        name="text"
+        name="Email"
         required
       />
     </mat-form-field>
@@ -36,18 +53,37 @@
         [(ngModel)]="userData.birth"
         type="text"
         placeholder="{{ userData.birth }}"
-        name="text"
+        name="DateOfBirth"
         required
       />
     </mat-form-field>
-    <button (click)="updateProfile()">update Profile</button>
+    <button
+      mat-raised-button
+      style="
+        padding: 10px;
+        width: max-content;
+        background-color: rgb(7, 96, 66);
+        color: white;
+      "
+      (click)="updateProfile()"
+    >
+      Update account
+    </button>
   </form>
-  <button
-    mat-raised-button
-    style="margin: 10px"
-    (click)="deleteProfile()"
-    color="secondary"
-  >
-    Delete User
-  </button>
-</mat-card>
+</mat-card-content>
+<h3 style="margin-left: 10px">
+  Once you delete your account, you cann't recover it.
+</h3>
+<button
+  mat-raised-button
+  style="
+    margin: 10px;
+    display: inline;
+    width: max-content;
+    background-color: rgb(209, 25, 25);
+  "
+  (click)="deleteProfile()"
+>
+  Delete account
+</button>
+<style></style>

@@ -33,13 +33,15 @@ export class ProfilePageComponent implements OnInit {
         'Password is compulsory. If you do not want to change password , use current password',
         'OK',
         {
-          duration: 2000,
+          duration: 3000,
         }
       );
     } else {
       this.fetchApiData.updateUser(this.userData).subscribe((response) => {
-        console.log('from update', response);
         localStorage.setItem('user', JSON.stringify(this.userData));
+        this.snackBar.open('Account updated', 'OK', {
+          duration: 2000,
+        });
         return response;
       });
     }
@@ -47,12 +49,13 @@ export class ProfilePageComponent implements OnInit {
 
   deleteProfile(): void {
     this.fetchApiData.deleteUser().subscribe((response) => {
-      console.log('delete', response);
       if (response === 'Account deleted') {
         localStorage.clear();
         this.router.navigate(['welcome']);
       } else {
-        console.log('Profile not deleted');
+        this.snackBar.open('Something went wrong. Please try again', 'OK', {
+          duration: 2000,
+        });
       }
     });
   }
@@ -66,7 +69,6 @@ export class ProfilePageComponent implements OnInit {
   userDetails(): any {
     var loggedInUser = localStorage?.getItem('user');
     if (loggedInUser) {
-      console.log('from profile', loggedInUser);
       return JSON.parse(localStorage.getItem('user') || '{Token not found}');
     }
     return 'User not found.';
