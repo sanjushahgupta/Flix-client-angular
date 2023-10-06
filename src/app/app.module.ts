@@ -14,13 +14,30 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+
+import { RouterModule, Routes } from '@angular/router';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: ProfilePageComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
     UserLoginFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +51,9 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatDialogModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatToolbarModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent],
