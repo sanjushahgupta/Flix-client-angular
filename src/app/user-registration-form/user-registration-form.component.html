@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<mat-card style="background-color: white; padding: 10px;">
+<mat-card class="sign-in-container">
   <mat-card-header>
     <mat-card-title>Create new account</mat-card-title>
   </mat-card-header>
@@ -47,17 +47,22 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button
-      mat-raised-button
-      (click)="registerUser()"
-      style="
-        background-color: rgb(7, 81, 131);
-        color: white;
-        display: block;
-        margin: 0 auto;
-      "
-    >
+    <button class="register-button" mat-raised-button (click)="registerUser()">
       Sign-Up
     </button>
   </mat-card-actions>
 </mat-card>
+
+<style>
+  .sign-in-container {
+    background-color: white;
+    padding: 10px;
+  }
+
+  .register-button {
+    background-color: rgb(7, 81, 131);
+    color: white;
+    display: block;
+    margin: 0 auto;
+  }
+</style>

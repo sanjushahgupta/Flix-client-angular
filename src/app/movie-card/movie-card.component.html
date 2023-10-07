@@ -1,5 +1,6 @@
-<div style="background-color: #66a3d8; height: 100%">
-  <mat-toolbar style="background-color: rgb(3, 24, 74); padding: 10px">
+<!DOCTYPE html>
+<div class="movie-container">
+  <mat-toolbar>
     <span>FlixWorld</span>
     <span class="space-between"></span>
     <mat-icon style="padding-right: 10px" (click)="toProfilePage()"
@@ -12,11 +13,9 @@
       <mat-card-header>
         <mat-card-title style="color: white">{{ movie.Title }}</mat-card-title>
       </mat-card-header>
-      <img
-        src="{{ movie.Image }}"
-        alt="{{ movie.Image }}"
-        style="width: 150px; height: 150px; border-radius: 50%"
-      />
+      <div class="circular-image-container">
+        <img src="{{ movie.Image }}" alt="{{ movie.Image }}" />
+      </div>
 
       <mat-card-actions style="color: white">
         <button
@@ -79,7 +78,16 @@
     </mat-card>
   </div>
 </div>
+
 <style>
+  .movie-container {
+    background-color: #66a3d8;
+    height: 100%;
+  }
+
+  .mat-toolbar {
+    background-color: rgb(3, 24, 74);
+  }
   .space-between {
     flex: 1 1 auto;
   }
@@ -88,16 +96,32 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
   .movie-card {
     background-image: url("https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2929&q=80");
     background-size: 100%;
     background-repeat: no-repeat;
-    align-items: flex-start;
+    align-items: center;
     flex: 1;
-    margin: 10px;
+    margin: 5px;
   }
   .dialog-box {
     background-color: white;
     padding: 10px;
+  }
+
+  .circular-image-container img {
+    height: 100%;
+    width: auto;
+  }
+  .circular-image-container {
+    display: flex;
+    justify-content: center;
+    width: 155px;
+    height: 155px;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
   }
 </style>

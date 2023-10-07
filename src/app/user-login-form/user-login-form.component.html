@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<mat-card style="background-color: white">
+<mat-card class="login-container">
   <mat-card-header>
     <mat-card-title>Login to your account</mat-card-title>
   </mat-card-header>
@@ -29,17 +29,21 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button
-      mat-raised-button
-      (click)="loginUser()"
-      style="
-        background-color: rgb(5, 37, 88);
-        color: white;
-        display: block;
-        margin: 0 auto;
-      "
-    >
+    <button class="login-btn" mat-raised-button (click)="loginUser()" style="">
       Login
     </button>
   </mat-card-actions>
 </mat-card>
+
+<style>
+  .login-container {
+    background-color: white;
+  }
+
+  .login-btn {
+    background-color: rgb(5, 37, 88);
+    color: white;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
