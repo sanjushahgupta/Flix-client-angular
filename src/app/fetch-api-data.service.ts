@@ -4,21 +4,34 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
-
+/** FetchApiDataService class is used for fetching data from the API */
 @Injectable({
   providedIn: 'root',
 })
 export class FetchApiDataService {
-  constructor(private http: HttpClient,
-  ) { }
+  /** constructor
+   *  @param {HttpClient} http ->  HttpClient instance
+   */
+  constructor(private http: HttpClient) {}
+
   private baseApiUrl = 'https://flix-api-1faf.onrender.com';
 
+  /**
+   * To register user
+   * @param {object} userDetails - User details for registration.
+   * @returns {Observable<any>} Observable of the registration API response.
+   */
   public registration(userDetails: any): Observable<any> {
     return this.http
       .post(this.baseApiUrl + '/register', userDetails)
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * To login user
+   * @param {object} userDetails
+   * @returns {Observable<any>} Observable of the login API response.
+   */
   //To userLogin: HTTP Method => post, endpoint -"/login", reqBody - userDetails, token = set token in localstorage
   public login(userDetails: any): Observable<any> {
     return this.http.post<any>(`${this.baseApiUrl}/login`, userDetails).pipe(
@@ -37,6 +50,10 @@ export class FetchApiDataService {
   }
 
   //Get all movies:  HTTP Method => get, endpoint -"/movies"
+  /**
+   * To get all movies
+   * @returns {Observable<any>} Observable of the getallMovies API response.
+   */
   public getAllMovies(): Observable<any> {
     const token = this.getToken();
 
@@ -50,6 +67,11 @@ export class FetchApiDataService {
   }
 
   //Get movieByTitle: HTTP Method => get, endpoint -"/movies/:title", route Parameter - title, token = get from localstorage, passed token in header
+  /**
+   * To get movie by title
+   * @param {string} title
+   * @returns {Observable<any>}
+   */
   public movieByTitle(title: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/${title}`;
@@ -64,6 +86,11 @@ export class FetchApiDataService {
   }
 
   //Get movieBydirectors: HTTP Method => get, endpoint -"/movies/directors/:name", route Parameter - name, token = get from localstorage, passed token in header
+  /**
+   * To get movie details by director
+   * @param {string} name -> director's name
+   * @returns {Observable<any>}
+   */
   public movieByDirector(name: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/directors/${name}`;
@@ -78,6 +105,11 @@ export class FetchApiDataService {
   }
 
   //Get movieByGenre: HTTP Method => get, endpoint -"/movies/genre/:name", route Parameter - name, token = get from localstorage, passed token in header
+  /**
+   * To get movie details by movie's genre
+   * @param {string} name -> genre
+   * @returns {Observable<any>}
+   */
   public movieByGenre(name: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/movies/genre/${name}`;
@@ -93,6 +125,12 @@ export class FetchApiDataService {
 
   //To addFavMovie: HTTP Method => post, endpoint -"/addfab/:movieTitle", route Parameter -movieTitle,token = get from localstorage, passed token in header
   // I have passed movieId just to save in local storage as movie is searched by title and then add it db with movie id so need to save in local storage by id
+  /**
+   * To get add movie to fav list
+   * @param {string} movieId
+   * @param {string} movieTitle
+   * @returns {Observable<any>}
+   */
   public addFavMovie(movieId: string, movieTitle: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/addfab/${movieTitle}`;
@@ -120,6 +158,10 @@ export class FetchApiDataService {
   }
 
   //Get FavMovieList of loggedIn user
+  /**
+   * To get list of fav movies
+   * @returns {any}
+   */
   public getFavouriteMovies(): any {
     const loggedInUser = JSON.parse(localStorage.getItem('user') || '{}');
     return loggedInUser.favoriteMovies || [];
@@ -127,7 +169,12 @@ export class FetchApiDataService {
 
   //To deletefavMovie: HTTP Method => delete, endpoint -"/deletefab/:movieTitle", route Parameter -movieTitle,token = get from localstorage, passed token in header
   // passed movieId  to save in local storage as movie is searched by title and then remove it db with movie id so need to delete in local storage by id
-
+  /**
+   * To delete movie from fav list
+   * @param {string} movieId
+   * @param {string} movieTitle
+   * @returns {Observable<any>}
+   */
   public deleteFavMovie(movieId: string, movieTitle: string): Observable<any> {
     const token = this.getToken();
     const url = `${this.baseApiUrl}/deletefab/${movieTitle}`;
@@ -156,6 +203,11 @@ export class FetchApiDataService {
   }
 
   //To update user: HTTP Method => put, endpoint ->"/updateUser", reqbody-> userToUpdate,token = from localstorage, passed token in header
+  /**
+   * To update user's details
+   * @param {object} userToUpdate
+   * @returns {Observable<any>}
+   */
   public updateUser(userToUpdate: any): Observable<any> {
     const token = this.getToken();
 
@@ -178,6 +230,10 @@ export class FetchApiDataService {
   }
 
   //To delete user: HTTP Method => delete,  endpoint ->("/deleteUser", token = from localstorage, passed token in header)
+  /**
+   * To delete user
+   * @returns {Observable<any>}
+   */
   public deleteUser(): Observable<any> {
     const token = this.getToken();
 

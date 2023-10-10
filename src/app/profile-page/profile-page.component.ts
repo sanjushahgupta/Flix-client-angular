@@ -4,6 +4,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/** ProfilePageComponent is a component which is used to display user's details */
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -17,6 +18,11 @@ export class ProfilePageComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
+  /** Input new data to update user
+   * userName,password,birth,email should be provided.
+   * favourite movies will be fetched from local storage
+   * @type {object}
+   */
   @Input() userData = {
     userName: this.userDetails().userName,
     password: 'Your password',
@@ -27,6 +33,11 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /** Updates details of user
+   * Calls the API to update the user's profile.
+   * @params{object} userData
+   * @returns {any} The response from the API.
+   */
   updateProfile(): any {
     if (this.userData.password == 'Your password') {
       this.snackBar.open(
@@ -47,6 +58,10 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
+  /** Deletes the user profile
+   * Calls the API to delete the user's profile.
+   * @returns {any}
+   */
   deleteProfile(): void {
     this.fetchApiData.deleteUser().subscribe((response) => {
       if (response === 'Account deleted') {
@@ -60,12 +75,18 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  /** Opens a dialog.
+   * @param {any} templateRef - Reference to the template
+   */
   openDialog(templateRef: any) {
     this.dialog.open(templateRef, {
       width: '300px',
     });
   }
 
+  /** get user details from local storage
+   * @returns {any}
+   */
   userDetails(): any {
     var loggedInUser = localStorage?.getItem('user');
     if (loggedInUser) {
