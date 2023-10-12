@@ -11,6 +11,8 @@
 - Deregister user
 
 ## Screenshots
+<img width="500" alt="flixWor" src="https://github.com/sanjushahgupta/flix-client-angular/assets/71315276/685625a2-8fc0-4172-8912-c6cf0de6019b">
+
 
 ##### Live site: https://sanjushahgupta.github.io/flix-client-angular/
 
